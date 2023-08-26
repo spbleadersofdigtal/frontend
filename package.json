@@ -14,6 +14,7 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "axios": "^1.4.0",
+    "chart.js": "^4.4.0",
     "clsx": "^2.0.0",
     "date-fns": "^2.30.0",
     "focus-visible": "^5.2.0",

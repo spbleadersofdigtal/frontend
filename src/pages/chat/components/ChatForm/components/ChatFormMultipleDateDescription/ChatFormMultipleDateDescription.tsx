@@ -36,7 +36,6 @@ export const ChatFormMultipleDateDescription: ReactFCC<ChatFormMultipleDateDescr
                   for (const date in hint.value) {
                     newValue[format(new Date(date),'yyyy-MM-dd')] = hint.value[date]
                   }
-                  console.log(hint.value);
                   setValue({ ...hint.value })
                 }}
               >

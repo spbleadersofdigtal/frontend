@@ -16,6 +16,8 @@ import {usePrevious} from '../../hooks/usePrevious';
 import {generateAnswerFromData} from './utils/generateAnswerFromData';
 import {generateTextFromAnswer} from './utils/generateTextFromAnswer';
 import {Button, ButtonVariant} from '../../components/Button';
+import {useNavigate} from 'react-router-dom';
+import {DECK_PAGE_PARAM, DECK_PAGE_ROUTE} from '../../app/routes';
 
 export interface ChatPageProps {
   /**
@@ -26,8 +28,8 @@ export interface ChatPageProps {
 
 const QUESTION_POLLING_MS = 1000;
 
-const DEFAULT_DECK_ID = 65;
-const DEFAULT_QUESTION_ID = 32;
+const DEFAULT_DECK_ID = 0;
+const DEFAULT_QUESTION_ID = 0;
 
 export const ChatPage: ReactFCC<ChatPageProps> = (props) => {
   const {className} = props;
@@ -115,6 +117,7 @@ export const ChatPage: ReactFCC<ChatPageProps> = (props) => {
 
 
   const { mutateAsync: createAnswer } = useCreateAnswer();
+  const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<any> = useCallback(async (data) => {
     if (!question || !data.value) {
@@ -136,16 +139,24 @@ export const ChatPage: ReactFCC<ChatPageProps> = (props) => {
       text: generateTextFromAnswer(question.type, answer)
     });
 
-    setQuestionId(question!.next_id);
+    if (question.next_id) {
+      setQuestionId(question!.next_id);
+    } else {
+      navigate(DECK_PAGE_ROUTE.replace(`:${DECK_PAGE_PARAM}`, String(deckId)))
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [createAnswer, deckId, pushHistory, question, questionId]);
 
   // Пропуск вопроса
   const onSkip = useCallback(() => {
     if (question && !question.params?.required) {
-      setQuestionId(question.next_id);
+      if (question.next_id) {
+        setQuestionId(question!.next_id);
+      } else {
+        navigate(DECK_PAGE_ROUTE.replace(`:${DECK_PAGE_PARAM}`, String(deckId)))
+      }
     }
-  }, [question]);
+  }, [deckId, navigate, question]);
 
   // ---------- Скролл чата ----------
   // todo при печатании текста тоже двигать скролл

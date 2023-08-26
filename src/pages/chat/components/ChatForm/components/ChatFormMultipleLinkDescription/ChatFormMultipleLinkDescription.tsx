@@ -49,7 +49,6 @@ export const ChatFormMultipleLinkDescription: ReactFCC<ChatFormMultipleLinkDescr
                       const newValue = { ...value };
                       const text = newValue[link];
                       delete newValue[link];
-                      console.log()
                       onChange({ ...newValue, [e.target.value]: text })
                     }}
                   />

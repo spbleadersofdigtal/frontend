@@ -9,6 +9,8 @@ export type IntrinsicPropsWithoutRef<E extends keyof JSX.IntrinsicElements> = Re
   JSX.IntrinsicElements[E]
 >;
 
+export type ExtractArray<T> = T extends (infer U)[] ? U : T;
+
 export type AnchorPropsWithoutRef = IntrinsicPropsWithoutRef<'a'>;
 export type DivPropsWithoutRef = IntrinsicPropsWithoutRef<'div'>;
 export type PPropsWithoutRef = IntrinsicPropsWithoutRef<'p'>;

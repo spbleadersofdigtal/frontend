@@ -46,11 +46,3 @@ $fonts-path: '../../assets/fonts' !default;
   font-style: normal;
   font-display: swap;
 }
-
-@font-face {
-  font-family: $font-family-lora;
-  src: url('#{$fonts-path}/Lora/Lora-Regular.ttf') format('truetype');
-  font-weight: $font-weight-400;
-  font-style: normal;
-  font-display: swap;
-}
