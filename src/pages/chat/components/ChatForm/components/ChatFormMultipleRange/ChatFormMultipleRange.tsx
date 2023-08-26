@@ -6,6 +6,7 @@ import s from './ChatFormMultipleRange.module.scss';
 import {Range} from '../../../../../../components/Range';
 import {Hint} from '../../../../../../api/deck';
 import {Hint as HintCmp, HintsContainer} from '../../../../../../components/Hint';
+import {currencyFormatter} from '../../../../../../utils/fomat';
 
 export interface RangeType {
   name: string;
@@ -24,7 +25,7 @@ export interface ChatFormSelectProps {
   hint?: Hint | false;
 }
 
-export const slugsForFormat = ['sam', 'som', 'tam', 'sum'];
+export const slugsForFormat = ['sam', 'som', 'tam', 'sum', 'cac', 'ltv'];
 
 export const ChatFormMultipleRange: ReactFCC<ChatFormSelectProps> = (props) => {
   const {className, registration, control, scrollbars, onSubmit, hint, setValue} = props;
@@ -37,7 +38,7 @@ export const ChatFormMultipleRange: ReactFCC<ChatFormSelectProps> = (props) => {
             {hint && hint.value && Object.entries(hint.value).map(([key, val], index) => {
               const range = scrollbars.find((j) => j.slug === key);
               return range ? (
-                <HintCmp onClick={() => setValue({ ...value, [key]: val })} key={index}>{`${range.name}: ${val}`}</HintCmp>
+                <HintCmp onClick={() => setValue({ ...value, [key]: val })} key={index}>{`${range.name}: ${slugsForFormat.includes(range.slug) ? currencyFormatter.format(val as any) : val}`}</HintCmp>
               ) : null
             })}
           </HintsContainer>

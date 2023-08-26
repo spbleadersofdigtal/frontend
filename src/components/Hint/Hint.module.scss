@@ -26,6 +26,10 @@
   color: $color-text-secondary;
   cursor: pointer;
 
+  @include scrollbar;
+  overflow-y: auto;
+  max-height: 500px;
+
   &:not(.Hint_hovered) {
     white-space: nowrap;
     max-width: 500px;
