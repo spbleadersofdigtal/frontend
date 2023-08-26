@@ -28,8 +28,8 @@ export const ChatFormText: ReactFCC<ChatFormTextProps> = (props) => {
       <HintsContainer isLoading={hint && !hint.value}>
         {hint && hint.value && (
           <>{Array.isArray(hint.value) ? hint.type === EntityType.cards ? (
-            <HintCmp onClick={() => setValue(hint.value.map((i: any) => i.description).join('\n\n'))}>
-              {hint.value.map((i) => i.description).join('\n')}
+            <HintCmp onClick={() => setValue(hint.value.map((i: any) => i.name).join(', '))}>
+              {hint.value.map((i, index, { length: arrLength }) => <span title={i.description}>{i.name}{index !== arrLength - 1 && ', '}</span>)}
             </HintCmp>
           ) : hint.value.map((item: string, index: number) => (
             <HintCmp onClick={() => setValue(item)} key={index}>{item}</HintCmp>

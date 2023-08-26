@@ -73,14 +73,17 @@ $button-border-width: 2px;
 
 .Button_size_small {
   height: 32px;
+  min-height: 32px;
 }
 
 .Button_size_medium {
   height: 40px;
+  min-height: 40px;
 }
 
 .Button_size_large {
   height: 48px;
+  min-height: 48px;
 }
 
 .Button_variant_primary {

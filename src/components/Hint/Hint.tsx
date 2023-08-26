@@ -12,11 +12,11 @@ export interface HintProps {
    * Дополнительный css-класс
    */
   className?: string;
-  children: string;
+  // children: string;
   onClick?: () => void;
 }
 
-export const Hint: FC<HintProps> = (props) => {
+export const Hint: ReactFCC<HintProps> = (props) => {
   const {children, className, onClick: onClickProp} = props;
 
   const isMobile = useIsMobile();

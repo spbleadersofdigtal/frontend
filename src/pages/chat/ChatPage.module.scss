@@ -51,6 +51,10 @@
   backdrop-filter: blur(10px);
   z-index: 2;
   @include flex-col;
+
+  max-height: 100svh;
+  overflow-y: auto;
+  @include scrollbar;
 }
 
 .ChatPage__skipButton {

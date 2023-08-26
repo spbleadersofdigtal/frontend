@@ -31,7 +31,14 @@ export const ChatFormMultipleDateDescription: ReactFCC<ChatFormMultipleDateDescr
             {hint && hint.value && (
               <HintCmp
                 className={s.ChatFormMultipleDateDescription__hint}
-                onClick={() => setValue({ ...hint.value })}
+                onClick={() => {
+                  const newValue: any = {};
+                  for (const date in hint.value) {
+                    newValue[format(new Date(date),'yyyy-MM-dd')] = hint.value[date]
+                  }
+                  console.log(hint.value);
+                  setValue({ ...hint.value })
+                }}
               >
                   {Object.entries(hint.value).map(([key, val]) => `${formatDate(key)}: ${val}`).join('\n')}
               </HintCmp>
@@ -42,7 +49,9 @@ export const ChatFormMultipleDateDescription: ReactFCC<ChatFormMultipleDateDescr
             {Object.entries(value).map(([date, text]: any, index, { length: arrLength }) => {
               return (
                 <div className={s.ChatFormMultipleDateDescription__group} key={index}>
-                  <Input className={s.ChatFormMultipleDateDescription__input} type={'date'} value={format(new Date(date),'yyyy-MM-dd')}
+                  <Input className={s.ChatFormMultipleDateDescription__input}
+                    type={'date'}
+                    value={format(new Date(date),'yyyy-MM-dd')}
                     onChange={(e) => {
                       const newValue = { ...value };
                       const text = newValue[date];

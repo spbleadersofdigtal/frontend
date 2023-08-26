@@ -57,7 +57,6 @@ const InputForwardedRef = React.forwardRef<HTMLDivElement, InputProps>(
       inputRef: inputRefProp,
       style,
       type,
-      value,
       registration,
       ...inputProps
     },
