@@ -1,0 +1,48 @@
+@import './baseText';
+
+$fonts-path: '../../assets/fonts' !default;
+
+@font-face {
+  font-family: $font-family-raleway;
+  src: url('#{$fonts-path}/Raleway/Raleway-Regular.woff2') format('woff2'),
+    url('#{$fonts-path}/Raleway/Raleway-Regular.woff') format('woff');
+  font-weight: $font-weight-400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: $font-family-raleway;
+  src: url('#{$fonts-path}/Raleway/Raleway-Medium.woff2') format('woff2'),
+    url('#{$fonts-path}/Raleway/Raleway-Medium.woff') format('woff');
+  font-weight: $font-weight-500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: $font-family-raleway;
+  src: url('#{$fonts-path}/Raleway/Raleway-SemiBold.woff2') format('woff2'),
+    url('#{$fonts-path}/Raleway/Raleway-SemiBold.woff') format('woff');
+  font-weight: $font-weight-600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: $font-family-raleway;
+  src: url('#{$fonts-path}/Raleway/Raleway-Bold.woff2') format('woff2'),
+    url('#{$fonts-path}/Raleway/Raleway-Bold.woff') format('woff');
+  font-weight: $font-weight-700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: $font-family-ibm-plex-mono;
+  src: url('#{$fonts-path}/IBM_Plex_Mono/IBMPlexMono-Regular.woff2') format('woff2'),
+    url('#{$fonts-path}/IBM_Plex_Mono/IBMPlexMono-Regular.woff') format('woff');
+  font-weight: $font-weight-400;
+  font-style: normal;
+  font-display: swap;
+}

@@ -1,0 +1,71 @@
+$breakpoint-mobile-small: 320px;
+$breakpoint-mobile-large: 375px;
+$breakpoint-tablet-small: 768px;
+$breakpoint-tablet-large: 1024px;
+$breakpoint-desktop-small: 1280px;
+$breakpoint-desktop-medium: 1440px;
+$breakpoint-desktop-large: 1920px;
+
+@mixin media-up($breakpoint) {
+  @if $breakpoint == mobile-small {
+    @media screen and (min-width: $breakpoint-mobile-small) {
+      @content;
+    }
+  } @else if $breakpoint == mobile-large {
+    @media screen and (min-width: $breakpoint-mobile-large) {
+      @content;
+    }
+  } @else if $breakpoint == tablet-small {
+    @media screen and (min-width: $breakpoint-tablet-small) {
+      @content;
+    }
+  } @else if $breakpoint == tablet-large {
+    @media screen and (min-width: $breakpoint-tablet-large) {
+      @content;
+    }
+  } @else if $breakpoint == desktop-small {
+    @media screen and (min-width: $breakpoint-desktop-small) {
+      @content;
+    }
+  } @else if $breakpoint == desktop-medium {
+    @media screen and (min-width: $breakpoint-desktop-medium) {
+      @content;
+    }
+  } @else if $breakpoint == desktop-large {
+    @media screen and (min-width: $breakpoint-desktop-large) {
+      @content;
+    }
+  }
+}
+
+@mixin media-down($breakpoint) {
+  @if $breakpoint == mobile-small {
+    @media screen and (max-width: $breakpoint-mobile-small - 1) {
+      @content;
+    }
+  } @else if $breakpoint == mobile-large {
+    @media screen and (max-width: $breakpoint-mobile-large - 1) {
+      @content;
+    }
+  } @else if $breakpoint == tablet-small {
+    @media screen and (max-width: $breakpoint-tablet-small - 1) {
+      @content;
+    }
+  } @else if $breakpoint == tablet-large {
+    @media screen and (max-width: $breakpoint-tablet-large - 1) {
+      @content;
+    }
+  } @else if $breakpoint == desktop-small {
+    @media screen and (max-width: $breakpoint-desktop-small - 1) {
+      @content;
+    }
+  } @else if $breakpoint == desktop-medium {
+    @media screen and (max-width: $breakpoint-desktop-medium - 1) {
+      @content;
+    }
+  } @else if $breakpoint == desktop-large {
+    @media screen and (max-width: $breakpoint-desktop-large - 1) {
+      @content;
+    }
+  }
+}
