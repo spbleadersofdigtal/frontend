@@ -1,5 +1,6 @@
 $font-family-raleway: 'Raleway';
 $font-family-ibm-plex-mono: 'IBM Plex Mono';
+$font-family-lora: 'Lora', serif;
 
 $font-family-default: system-ui, /* macOS 10.11-10.12 */ -apple-system, /* Windows 6+ */ 'Segoe UI',
   /* Android 4+ */ 'Roboto', /* Ubuntu 10.10+ */ 'Ubuntu', /* Gnome 3+ */ 'Cantarell', /* KDE Plasma 5+ */ 'Noto Sans',
@@ -150,4 +151,11 @@ $line-height-67: 67px;
   font-size: $font-size-12;
   font-weight: $font-weight-400;
   line-height: $line-height-16;
+}
+
+@mixin text-presentation {
+  font-family: $font-family-lora;
+  font-size: $font-size-16;
+  font-weight: $font-weight-400;
+  line-height: $line-height-20;
 }
