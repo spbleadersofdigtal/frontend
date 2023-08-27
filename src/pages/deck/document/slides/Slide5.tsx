@@ -3,6 +3,7 @@ import {Image, Page, StyleSheet, Text, View} from '@react-pdf/renderer';
 import {bgColor, pageFontStyles, primaryColor, titleStyles} from '../shared';
 import {GetDeckResponse} from '../../../../api/deck/getDeck';
 import {ExtractArray} from '../../../../utils/types';
+import {currencyFormatter} from '../../../../utils/fomat';
 
 export interface Slide5Props {
   data: ExtractArray<GetDeckResponse['slides']>['data'];
@@ -52,6 +53,7 @@ export const Slide5: ReactFCC<Slide5Props> = (props) => {
         <Text style={styles.title}>Рынок</Text>
         <View style={styles.divider} />
         <Text style={styles.text}>Целевая аудитория: {users}</Text>
+        <Text style={styles.text}>Объем рынка (TAM): {currencyFormatter.format(market_values.tam)}р.</Text>
         <Image style={styles.image} src={marketChart} />
       </View>
     </Page>

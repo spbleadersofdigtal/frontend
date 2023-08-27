@@ -36,8 +36,6 @@ export const ChatFormMultiplePhoto: ReactFCC<ChatFormMultiplePhotoProps> = (prop
                 files[`file_${Object.keys(files).length + 1}`] = file;
               });
 
-              console.log(files);
-
               onChange({ ...files })
             }}
           />
