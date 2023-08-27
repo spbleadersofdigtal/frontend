@@ -1,8 +1,9 @@
 import {ReactFCC} from '../../../../utils/ReactFCC';
 import {Image, Page, StyleSheet, Text, View} from '@react-pdf/renderer';
-import {bgColor, primaryColor} from '../shared';
+import {bgColor, pageFontStyles, primaryColor, subtitleStyles, titleStyles} from '../shared';
 import {GetDeckResponse} from '../../../../api/deck/getDeck';
 import {ExtractArray} from '../../../../utils/types';
+import {currencyFormatter} from '../../../../utils/fomat';
 
 export interface Slide8Props {
   data: ExtractArray<GetDeckResponse['slides']>['data'];
@@ -16,20 +17,20 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     backgroundColor: bgColor,
     color: primaryColor,
-    fontFamily: 'Roboto',
     padding: '48px',
+    ...pageFontStyles
   },
   title: {
-    fontSize: 36,
-    width: '100%',
-    letterSpacing: 3,
-    textTransform: 'uppercase'
+    ...titleStyles
   },
   divider: {
     width: '100%',
     height: 1,
     backgroundColor: primaryColor,
     margin: '8px 0 16px'
+  },
+  subtitle: {
+    ...subtitleStyles
   },
   text: {
     width: '100%',
@@ -55,6 +56,11 @@ export const Slide8: ReactFCC<Slide8Props> = (props) => {
       <View>
         <Text style={styles.title}>Финансы</Text>
         <View style={styles.divider} />
+
+        <Text style={styles.subtitle}>Уже получено инвестиций</Text>
+        <Text style={styles.text}>{currencyFormatter.format(how_much_investments)}р.</Text>
+
+        <Text style={styles.subtitle}>Финансовые индикаторы</Text>
         <Text style={styles.text}>{financial_indicators}</Text>
         <Image style={styles.image} src={financialChart} />
       </View>

@@ -1,8 +1,9 @@
 import {ReactFCC} from '../../../../utils/ReactFCC';
 import {Image, Page, StyleSheet, Text, View} from '@react-pdf/renderer';
-import {bgColor, primaryColor} from '../shared';
+import {bgColor, pageFontStyles, primaryColor, secondaryColor, titleStyles} from '../shared';
 import {GetDeckResponse} from '../../../../api/deck/getDeck';
 import {ExtractArray} from '../../../../utils/types';
+import {BACKEND_URL} from '../../../../config';
 
 export interface Slide9Props {
   data: ExtractArray<GetDeckResponse['slides']>['data'];
@@ -15,14 +16,11 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     backgroundColor: bgColor,
     color: primaryColor,
-    fontFamily: 'Roboto',
     padding: '48px',
+    ...pageFontStyles,
   },
   title: {
-    fontSize: 36,
-    width: '100%',
-    letterSpacing: 3,
-    textTransform: 'uppercase'
+    ...titleStyles
   },
   divider: {
     width: '100%',
@@ -32,23 +30,54 @@ const styles = StyleSheet.create({
   },
   text: {
     width: '100%',
-    fontSize: '20px',
-    marginBottom: 24
+    fontSize: '16px',
   },
+  map: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 24,
+    marginTop: 16
+  },
+  item: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 16,
+  },
+  image: {
+    width: 200,
+    height: 150,
+    objectFit: 'cover'
+  }
 });
 
 export const Slide9: ReactFCC<Slide9Props> = (props) => {
   const { data } = props;
 
-  // const how_much_investments = data.find((i) => i.slug === 'how_much_investments')?.answer as any;
-  // const users_metrics = data.find((i) => i.slug === 'users_metrics')?.answer as any;
+  const your_role = data.find((i) => i.slug === 'your_role') as any;
+  const url = your_role?.photos?.[0];
+  const your_teammates = data.find((i) => i.slug === 'your_teammates') as any;
 
   return (
     <Page size="A4" orientation={'landscape'} style={styles.page}>
       <View>
         <Text style={styles.title}>Команда</Text>
-        {/*<View style={styles.divider} />*/}
-        {/*<Text style={styles.text}>{how_much_investments}</Text>*/}
+        <View style={styles.divider} />
+
+        <View style={styles.map}>
+          {your_teammates && your_teammates.answer?.map((i: any, index: number) => {
+            const url = your_teammates?.photos?.[index];
+
+            return (
+              <View style={styles.item} key={index}>
+                {url && (
+                  <Image style={styles.image} src={BACKEND_URL + url} />
+                )}
+                <Text style={styles.text}>{i}</Text>
+              </View>
+            )
+          })}
+        </View>
       </View>
     </Page>
   )

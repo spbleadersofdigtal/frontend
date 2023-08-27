@@ -29,8 +29,8 @@ export interface ChatPageProps {
 
 const QUESTION_POLLING_MS = 1000;
 
-const DEFAULT_DECK_ID = 80;
-const DEFAULT_QUESTION_ID = 25;
+const DEFAULT_DECK_ID = 0;
+const DEFAULT_QUESTION_ID = 0;
 
 export const ChatPage: ReactFCC<ChatPageProps> = (props) => {
   const {className} = props;

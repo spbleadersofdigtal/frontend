@@ -20,6 +20,7 @@ export type GetDeckResponse = {
     data: {
       slug: string;
       answer: any;
+      photos?: string[]
     }[];
   }[];
 };

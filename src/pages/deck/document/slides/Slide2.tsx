@@ -1,6 +1,6 @@
 import {ReactFCC} from '../../../../utils/ReactFCC';
 import {Page, StyleSheet, Text, View} from '@react-pdf/renderer';
-import {bgColor, primaryColor} from '../shared';
+import {bgColor, pageFontStyles, primaryColor, titleStyles} from '../shared';
 import {GetDeckResponse} from '../../../../api/deck/getDeck';
 import {ExtractArray} from '../../../../utils/types';
 
@@ -15,14 +15,11 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     backgroundColor: bgColor,
     color: primaryColor,
-    fontFamily: 'Roboto',
     padding: '48px',
+    ...pageFontStyles
   },
   title: {
-    fontSize: 36,
-    width: '100%',
-    letterSpacing: 3,
-    textTransform: 'uppercase'
+    ...titleStyles
   },
   divider: {
     width: '100%',
@@ -32,7 +29,6 @@ const styles = StyleSheet.create({
   },
   text: {
     width: '100%',
-    fontSize: '20px',
   },
 });
 

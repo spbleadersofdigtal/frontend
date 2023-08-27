@@ -1,6 +1,6 @@
 import {ReactFCC} from '../../../../utils/ReactFCC';
-import {Image, Page, StyleSheet, Text, View} from '@react-pdf/renderer';
-import {bgColor, primaryColor} from '../shared';
+import {Page, StyleSheet, Text, View} from '@react-pdf/renderer';
+import {bgColor, pageFontStyles, primaryColor, subtitleStyles, titleStyles} from '../shared';
 import {GetDeckResponse} from '../../../../api/deck/getDeck';
 import {ExtractArray} from '../../../../utils/types';
 import {formatDate} from '../../../../utils/fomat';
@@ -17,14 +17,15 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     backgroundColor: bgColor,
     color: primaryColor,
-    fontFamily: 'Roboto',
     padding: '48px',
+    ...pageFontStyles,
   },
   title: {
     fontSize: 36,
     width: '100%',
     letterSpacing: 3,
-    textTransform: 'uppercase'
+    textTransform: 'uppercase',
+    ...titleStyles
   },
   divider: {
     width: '100%',
@@ -33,8 +34,8 @@ const styles = StyleSheet.create({
     margin: '8px 0 16px'
   },
   subtitle: {
-    fontSize: '18px',
-    marginBottom: '4px',
+    ...subtitleStyles,
+    marginBottom: '12px',
     marginLeft: '-6px'
   },
   text: {
@@ -70,7 +71,7 @@ export const Slide12: ReactFCC<Slide12Props> = (props) => {
   return (
     <Page size="A4" orientation={'landscape'} style={styles.page}>
       <View>
-        <Text style={styles.title}>Роадмап</Text>
+        <Text style={styles.title}>План развития</Text>
         <View style={styles.divider} />
 
         <View style={styles.map}>

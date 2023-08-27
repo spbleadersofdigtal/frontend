@@ -14,6 +14,7 @@ import {generateGrowChart} from './document/media/generateGrowChart';
 export const DeckPage: ReactFCC = () => {
   const deckId = useUrlParam(DECK_PAGE_PARAM, {parser: parseInt});
 
+  // todo поставить таумаут искуственно
   const { data } = useDeck({
     deckId: deckId ?? 0,
     config: {
