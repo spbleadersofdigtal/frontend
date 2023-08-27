@@ -1,15 +1,16 @@
 import {ReactFCC} from '../../utils/ReactFCC';
-import {PDFViewer} from '@react-pdf/renderer';
+import {PDFDownloadLink} from '@react-pdf/renderer';
 import {useUrlParam} from '../../hooks/useUrlParam';
 import {DECK_PAGE_PARAM} from '../../app/routes';
 import {MyDocument} from './document/Document';
 import {useDeck} from '../../api/deck/getDeck';
-import {useEffect, useRef, useState} from 'react';
+import {useCallback, useEffect, useRef, useState} from 'react';
 import {generateMarketChart} from './document/media/generateMarketChart';
 import {Loader} from '../../components/Loader';
 import s from './DeckPage.module.scss';
 import {generateFinancialChart} from './document/media/generateFinancialChart';
 import {generateGrowChart} from './document/media/generateGrowChart';
+import {useConvert} from '../../api/deck/convert';
 
 export const DeckPage: ReactFCC = () => {
   const deckId = useUrlParam(DECK_PAGE_PARAM, {parser: parseInt});
@@ -70,21 +71,58 @@ export const DeckPage: ReactFCC = () => {
     }, 3000);
   }, []);
 
+  const { mutateAsync: convert, isLoading } = useConvert();
+
+  const getPptxLink = useCallback(async (blob: Blob | null) => {
+    if (!blob || isLoading) {
+      return;
+    }
+
+    const file = new File([blob], "name", {
+      type: 'application/pdf'
+    });
+
+    const data = await convert({ pdf: file });
+
+    if (data.pptx) {
+      window.open(data.pptx,'_blank', 'noopener');
+    }
+  }, [convert, isLoading])
+
   return (
     <div className={s.DeckPage}>
       {!rendered && (
         <Loader className={s.DeckPage__loader} />
       )}
       {data && marketChart && financialChart && growChart ? (
-        <PDFViewer style={{ width: '100vw', height: '100vh' }}>
+        <PDFDownloadLink document={
           <MyDocument
             onRender={() => setRendered(true)}
             data={data}
             marketChart={marketChart}
             financialChart={financialChart}
             growChart={growChart}
-          />
-        </PDFViewer>
+          />}
+          fileName="somename.pdf">
+          {({ blob, url, error }) =>
+            <div style={{ color: 'black' }}>
+              <>
+                {error && `Ошибка: ${error}`}
+
+                {blob && (
+                  <>
+                    <div className={s.DeckPage__link} onClick={() => getPptxLink(blob)}>Скачать PPTX</div>
+                    {isLoading && <div className={s.DeckPage__span}>Загрузка...</div>}
+                  </>
+                )}
+
+                {url && (
+                  <iframe title={'pdf-viewer'} src={url!} style={{ width: '100vw', height: '100vh', border: 'none' }} />
+                )}
+              </>
+            </div>
+          }
+        </PDFDownloadLink>
       ) : (
         <div style={{ visibility: 'hidden' }}>
           <canvas id={'chart1'} />

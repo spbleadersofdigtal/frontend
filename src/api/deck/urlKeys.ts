@@ -9,3 +9,5 @@ export const QUESTION_API_URL = `/decks/question/:${FIRST_QUESTION_PARAM}/:${QUE
 
 export const DECK_PARAM = 'deckId';
 export const DECK_API_URL = `/decks/question/:${FIRST_QUESTION_PARAM}/presentation`;
+
+export const CONVERT_API_URL = '/decks/pdf-to-pptx';
