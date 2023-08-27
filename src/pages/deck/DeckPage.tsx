@@ -67,7 +67,7 @@ export const DeckPage: ReactFCC = () => {
   useEffect(() => {
     setTimeout(() => {
       setEnabled(true)
-    }, 2000);
+    }, 3000);
   }, []);
 
   return (
