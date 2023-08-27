@@ -22,6 +22,12 @@ export const generateAnswerFromData = (question: Question, data: any) => {
       };
     case EntityType.multiple_link_description:
       return data.value;
+    case EntityType.photo_description:
+      return JSON.stringify(data.value.text);
+    case EntityType.multiple_photo:
+      return '';
+    case EntityType.multiple_photo_description:
+      return JSON.stringify(data.value.map((i: any) => i.text));
     default:
       return '';
   }

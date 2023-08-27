@@ -58,7 +58,11 @@ export const ChatFormMultipleDateDescription: ReactFCC<ChatFormMultipleDateDescr
                       onChange({ ...newValue, [new Date(e.target.value).toISOString()]: text })
                     }}
                   />
-                  <Textarea className={s.ChatFormMultipleDateDescription__textarea} placeholder={'Текст'} value={text}
+                  <Textarea
+                    rows={1}
+                    className={s.ChatFormMultipleDateDescription__textarea}
+                    placeholder={'Текст'}
+                    value={text}
                     onChange={(e) => {
                       onChange({ ...value, [date]: e.target.value })
                     }}

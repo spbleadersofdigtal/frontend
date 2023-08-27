@@ -1,12 +1,15 @@
 import {ReactFCC} from '../../../../utils/ReactFCC';
-import {EntityType, Hint, Question} from '../../../../api/deck';
+import {EntityType, Question} from '../../../../api/deck';
 import {Form} from '../../../../components/Form';
-import {ChatFormText} from './components/ChatFormText/ChatFormText';
+import {ChatFormText} from './components/ChatFormText';
 import {ChatFormSelect} from './components/ChatFormSelect';
 import {ChatFormMultipleRange, RangeType} from './components/ChatFormMultipleRange';
 import {ChatFormMultipleDateDescription} from './components/ChatFormMultipleDateDescription';
 import {ChatFormRange} from './components/ChatFormRange';
 import {ChatFormMultipleLinkDescription} from './components/ChatFormMultipleLinkDescription';
+import {ChatFormPhotoDescription} from './components/ChatFormPhotoDescription';
+import {ChatFormMultiplePhoto} from './components/ChatFormMultiplePhoto';
+import {ChatFormMultiplePhotoDescription} from './components/ChatFormMultiplePhotoDescription';
 
 export interface QuestionFactoryProps {
   type: EntityType;
@@ -183,6 +186,57 @@ export const QuestionFactory: ReactFCC<QuestionFactoryProps> = (props) => {
           )}
         </Form>
       )
+    case EntityType.photo_description:
+      return (
+        <Form options={{
+          values: {
+            value: {
+              file: null,
+              text: '',
+            }
+          }
+        }}>
+          {({ handleSubmit, register, control }) => (
+            <ChatFormPhotoDescription
+              registration={register('value', { required: true })}
+              control={control as any}
+              onSubmit={handleSubmit(onSubmit)}
+            />
+          )}
+        </Form>
+      );
+    case EntityType.multiple_photo:
+      return (
+        <Form options={{
+          values: {
+            value: {}
+          }
+        }}>
+          {({ handleSubmit, register, control }) => (
+            <ChatFormMultiplePhoto
+              registration={register('value', { required: true })}
+              control={control as any}
+              onSubmit={handleSubmit(onSubmit)}
+            />
+          )}
+        </Form>
+      );
+    case EntityType.multiple_photo_description:
+      return (
+        <Form options={{
+          values: {
+            value: []
+          }
+        }}>
+          {({ handleSubmit, register, control }) => (
+            <ChatFormMultiplePhotoDescription
+              registration={register('value', { required: true })}
+              control={control as any}
+              onSubmit={handleSubmit(onSubmit)}
+            />
+          )}
+        </Form>
+      );
     default:
       return null;
   }

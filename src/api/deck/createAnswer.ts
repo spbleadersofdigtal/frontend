@@ -9,6 +9,8 @@ export type CreateAnswerDTO = {
   deckId: number;
   questionId: number;
   answer: any;
+  isFile?: boolean;
+  file?: File;
 };
 
 export type CreateAnswerResponse = Answer;
@@ -18,7 +20,29 @@ export const createAnswer = (data: CreateAnswerDTO): Promise<CreateAnswerRespons
     .replace(`:${QUESTION_PARAM_DECK_ID}`, String(data.deckId))
     .replace(`:${QUESTION_PARAM_QUESTION_ID}`, String(data.questionId)) + '/'
 
-  return axios.post(path, { answer: data.answer });
+  let inputData: any;
+  if (data.isFile) {
+    inputData = new FormData();
+    if (data.answer) {
+      inputData.append('answer', `${data.answer}`);
+    }
+    for (const key in data) {
+      if (key !== 'answer' && key !== 'isFile' && key !== 'deckId' && key !== 'questionId') {
+        // @ts-ignore
+        inputData.append(key, data[key]);
+      }
+    }
+  } else {
+    inputData = {
+      answer: data.answer,
+    }
+  }
+
+  return axios.post(path, inputData, {
+    headers: data.isFile ? {
+      'Content-Type': 'multipart/form-data'
+    } : {}
+  });
 };
 
 type UseCreateAnswerOptions = {

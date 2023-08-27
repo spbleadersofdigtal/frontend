@@ -18,6 +18,7 @@ import {generateTextFromAnswer} from './utils/generateTextFromAnswer';
 import {Button, ButtonVariant} from '../../components/Button';
 import {useNavigate} from 'react-router-dom';
 import {DECK_PAGE_PARAM, DECK_PAGE_ROUTE} from '../../app/routes';
+import {generateFieldsForFileAnswers} from './utils/generateFieldsForFileAnswers';
 
 export interface ChatPageProps {
   /**
@@ -28,8 +29,8 @@ export interface ChatPageProps {
 
 const QUESTION_POLLING_MS = 1000;
 
-const DEFAULT_DECK_ID = 0;
-const DEFAULT_QUESTION_ID = 0;
+const DEFAULT_DECK_ID = 80;
+const DEFAULT_QUESTION_ID = 25;
 
 export const ChatPage: ReactFCC<ChatPageProps> = (props) => {
   const {className} = props;
@@ -127,16 +128,19 @@ export const ChatPage: ReactFCC<ChatPageProps> = (props) => {
     timeout.clear();
 
     const answerValue = generateAnswerFromData(question, data);
+    const additionalFields = generateFieldsForFileAnswers(question, data);
 
     const answer = await createAnswer({
       deckId,
       questionId,
-      answer: answerValue
+      answer: answerValue,
+      ...additionalFields,
+      isFile: !!additionalFields && Object.keys(additionalFields).length !== 0
     });
 
     pushHistory({
       type: ChatItemType.send,
-      text: generateTextFromAnswer(question.type, answer)
+      text: generateTextFromAnswer(question.type, answer, additionalFields)
     });
 
     if (question.next_id) {

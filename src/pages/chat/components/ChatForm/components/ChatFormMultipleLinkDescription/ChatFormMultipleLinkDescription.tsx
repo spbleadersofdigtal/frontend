@@ -52,7 +52,9 @@ export const ChatFormMultipleLinkDescription: ReactFCC<ChatFormMultipleLinkDescr
                       onChange({ ...newValue, [e.target.value]: text })
                     }}
                   />
-                  <Textarea className={s.ChatFormMultipleDateDescription__textarea}
+                  <Textarea
+                    rows={1}
+                    className={s.ChatFormMultipleDateDescription__textarea}
                     placeholder={'Текст'}
                     value={text}
                     onChange={(e) => {

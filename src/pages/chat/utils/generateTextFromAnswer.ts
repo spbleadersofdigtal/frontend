@@ -2,7 +2,7 @@ import {Answer, EntityType} from '../../../api/deck';
 import {currencyFormatter, formatDate} from '../../../utils/fomat';
 import {slugsForFormat} from '../components/ChatForm/components/ChatFormMultipleRange';
 
-export const generateTextFromAnswer = (type: EntityType, answer: Answer) => {
+export const generateTextFromAnswer = (type: EntityType, answer: Answer, files?: { [key: string]: File }) => {
   switch (type) {
     case EntityType.text:
       return answer.answer;
@@ -25,6 +25,17 @@ export const generateTextFromAnswer = (type: EntityType, answer: Answer) => {
         currencyFormatter.format(value) : value
     case EntityType.multiple_link_description:
       return Object.entries(answer.answer).map(([key, value]) => `${key}: ${value}`).join('\n');
+    case EntityType.photo_description:
+      return `${answer.answer}\n${files?.file?.name}`
+    case EntityType.multiple_photo:
+      return Object.values(files || {}).map((file) => `${file.name}`)
+    case EntityType.multiple_photo_description:
+      let result = '';
+      answer.answer.forEach((desc: string, index: number, arr: any) => {
+        result += files?.[`file_${index + 1}`].name + '\n';
+        result += desc + (index !== arr.length - 1 ? '\n\n' : '');
+      });
+      return result;
     default:
       return '';
   }
