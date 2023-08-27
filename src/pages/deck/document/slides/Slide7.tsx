@@ -3,6 +3,7 @@ import {Image, Page, StyleSheet, Text, View} from '@react-pdf/renderer';
 import {bgColor, pageFontStyles, primaryColor, subtitleStyles, titleStyles} from '../shared';
 import {GetDeckResponse} from '../../../../api/deck/getDeck';
 import {ExtractArray} from '../../../../utils/types';
+import {BACKEND_URL} from '../../../../config';
 
 export interface Slide7Props {
   data: ExtractArray<GetDeckResponse['slides']>['data'];
@@ -35,12 +36,20 @@ const styles = StyleSheet.create({
   subtitle: {
     ...subtitleStyles
   },
+  image: {
+    margin: '0 auto',
+    width: 400,
+    height: 400,
+    objectFit: 'contain'
+  }
 });
 
 export const Slide7: ReactFCC<Slide7Props> = (props) => {
   const { data } = props;
 
   const money = data.find((i) => i.slug === 'money')?.answer as string;
+  const finance_model = data.find((i) => i.slug === 'finance_model')?.photos
+  const url = finance_model?.[0] ? BACKEND_URL + finance_model[0] : undefined;
 
   return (
     <Page size="A4" orientation={'landscape'} style={styles.page}>
@@ -49,6 +58,10 @@ export const Slide7: ReactFCC<Slide7Props> = (props) => {
         <View style={styles.divider} />
 
         <Text style={styles.text}>{money}</Text>
+
+        {url && (
+          <Image src={url} style={styles.image} />
+        )}
       </View>
     </Page>
   )

@@ -1,6 +1,6 @@
 import {ReactFCC} from '../../../../utils/ReactFCC';
 import {Image, Page, StyleSheet, Text, View} from '@react-pdf/renderer';
-import {bgColor, pageFontStyles, primaryColor, secondaryColor, titleStyles} from '../shared';
+import {bgColor, pageFontStyles, primaryColor, titleStyles} from '../shared';
 import {GetDeckResponse} from '../../../../api/deck/getDeck';
 import {ExtractArray} from '../../../../utils/types';
 import {BACKEND_URL} from '../../../../config';
@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
     margin: '8px 0 16px'
   },
   text: {
-    width: '100%',
     fontSize: '16px',
   },
   map: {
@@ -43,6 +42,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     gap: 16,
+    width: 200,
   },
   image: {
     width: 200,

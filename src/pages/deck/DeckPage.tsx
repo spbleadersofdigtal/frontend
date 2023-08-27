@@ -14,11 +14,12 @@ import {generateGrowChart} from './document/media/generateGrowChart';
 export const DeckPage: ReactFCC = () => {
   const deckId = useUrlParam(DECK_PAGE_PARAM, {parser: parseInt});
 
-  // todo поставить таумаут искуственно
+  const [enabled, setEnabled] = useState(false);
+
   const { data } = useDeck({
     deckId: deckId ?? 0,
     config: {
-      enabled: !!deckId
+      enabled: !!deckId && enabled
     }
   });
 
@@ -63,6 +64,11 @@ export const DeckPage: ReactFCC = () => {
     );
   }, [data]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setEnabled(true)
+    }, 2000);
+  }, []);
 
   return (
     <div className={s.DeckPage}>
