@@ -48,7 +48,7 @@ export const ChatPage: ReactFCC<ChatPageProps> = (props) => {
     if (!initRef.current) {
       pushHistory({
         type: ChatItemType.receive,
-        text: 'Введите описание проекта',
+        text: 'Введите описание проекта (не больше 2-3 предложений)',
       });
       initRef.current = true;
     }
