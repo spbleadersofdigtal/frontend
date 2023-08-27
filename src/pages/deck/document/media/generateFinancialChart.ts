@@ -20,7 +20,10 @@ export const generateFinancialChart = (rootId: string, [cac, ltv]: [number, numb
       aspectRatio: 2,
       animation: {
         onComplete: function () {
-          callback(chart.toBase64Image());
+          setTimeout(() => {
+            const image = chart?.toBase64Image() || 'data:image/png;base64,i';
+            callback(image);
+          }, 1000);
         },
       },
     },
